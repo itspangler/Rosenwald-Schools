@@ -225,11 +225,11 @@
 		// request some basemap tiles and add to the map
 		var tiles = L.tileLayer(basemap_source, basemap_options).addTo(map);
 
-		$.getJSON("data/rosenwald-schools-031819.geojson", function(data) {
+		$.getJSON("data/rosenwald-schools-short.geojson", function(data) {
 		  console.log(data);
 		});
 
-		$.getJSON("data/rosenwald-schools-031819.geojson", function(data) {
+		$.getJSON("data/rosenwald-schools-short.geojson", function(data) {
 		  L.geoJson(data).addTo(map);
 		});
 
