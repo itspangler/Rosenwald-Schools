@@ -69,18 +69,21 @@
 			font-weight: 150i;
 			font-size: 1.5em;
 			margin: 0;
+			font-family: 'Georgia';
 		}
 
 		p {
 			font-size: 1.1em;
 			line-height: 1.3em;
 			margin-bottom: 0.1px;
+			font-family: 'Georgia';
 		}
 
 		a {
 			color: #004A8B;
 			font-weight: 400;
 			text-decoration: none;
+			font-family: 'Georgia';
 		}
 
 		a:hover {
@@ -340,13 +343,13 @@
 					}
 				},
 	      onEachFeature: function(feature,layer) {
-	        var tooltip = "<h4>" + feature.properties.name_hist + "</h4>" + "<b>" + "Location: " + "</b>"+
+	        var tooltip = "<h4>" + feature.properties.name_hist + "</h4>" + "<p>" + "<b>" + "Location: " + "</b>"+
 					feature.properties.county + ", " + feature.properties.state + "<br>" + "<b>" +
 					"Funded by African Americans: " + "</b>" + "$" + feature.properties.cost_black + "<br>" + "<b>" +
 					"Funded by Rosenwald: " + "</b>" + "$" +feature.properties.cost_rwald + "<br>" + "<b>" +
 					"Funded by Public: " + "</b>" + "$" +feature.properties.cost_pub + "<br>" + "<b>" +
 					"Funded by Whites: " + "</b>" + "$" +feature.properties.cost_white + "<br>" + "<b>" +
-					"Total cost: " + "</b>" + "$" +feature.properties.cost_total
+					"Total cost: " + "</b>" + "$" +feature.properties.cost_total + "</p>"
 	        layer.bindTooltip(tooltip);
 	        layer.on('mouseover', function(){
 	          this.openTooltip();
