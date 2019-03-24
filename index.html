@@ -271,7 +271,7 @@
       // after you get the class breaks, call the legend function
       drawLegend(breaks)
       dataLayer.eachLayer(function (layer) {
-        var props = layer.feature.properties.cost_total;
+        var props = layer.feature.properties;
 				console.log(props);
         layer.setStyle({
           fillColor: getColor(props[attributeValue], breaks)
@@ -285,12 +285,13 @@
       var values = [];
       // loop through all the counties
       dataLayer.eachLayer(function (layer) {
-        var props = layer.feature.properties.cost_total;
+        var props = layer.feature.properties;
         var value = props[attributeValue];
         if (value != null) { // Check for null values
           values.push(Number(value)); // Add as number
         }
-      });; // verify in the Console
+      });
+			console.log(values)// verify in the Console
       // determine similar clusters
 
       var clusters = ss.ckmeans(values, 5);
