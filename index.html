@@ -310,6 +310,11 @@
 		var attributeValue = "cost_total";
 		console.log(attributeValue)
 
+		function getRadius(area) {
+			var radius = Math.sqrt(area / Math.PI);
+			return radius * .12;
+		}
+
 		// draw rosenwald school layer
 		var schoolsLayer = $.getJSON("data/rosenwald-short.geojson", function (data){
 			var dataLayer = L.geoJson(data, {
@@ -322,6 +327,16 @@
 	          radius: 5
 	        });
 	      },
+				filter: function(feature) {
+					if ((feature.properties.cost_total) > 0) {
+						return feature;
+					}
+				},
+				style: function(feature) {
+					return {
+						radius: getRadius(feature.properties.cost_total)
+					}
+				},
 	      onEachFeature: function(feature,layer) {
 	        var tooltip = "<h4>" + feature.properties.name_hist + "</h4>" + "<b>" + "Location: " + "</b>"+
 					feature.properties.county + ", " + feature.properties.state + "<br>" + "<b>" +
