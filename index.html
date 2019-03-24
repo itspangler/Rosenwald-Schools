@@ -257,7 +257,7 @@
 	        });
 	      }
 	    })
-			dataLayer.addTo(map);
+			dataLayer.addTo(map)
 
 			drawMap(dataLayer);
 
@@ -272,7 +272,6 @@
       drawLegend(breaks)
       dataLayer.eachLayer(function (layer) {
         var props = layer.feature.properties;
-				console.log(props);
         layer.setStyle({
           fillColor: getColor(props[attributeValue], breaks)
         });
@@ -290,7 +289,7 @@
         if (value != null) { // Check for null values
           values.push(Number(value)); // Add as number
         }
-      });
+      });;
 			console.log(values)// verify in the Console
       // determine similar clusters
 
