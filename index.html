@@ -200,6 +200,7 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.js"></script>
+	<script src="data/rosenwald-schools-short.js"></script>
 	<script>
 
 		// map options
@@ -224,6 +225,8 @@
 
 		// request some basemap tiles and add to the map
 		var tiles = L.tileLayer(basemap_source, basemap_options).addTo(map);
+
+		var attributeValue = "cost_total"
 
 		// draw rosenwald school layer
 		var schoolsLayer = $.getJSON("data/rosenwald-schools-short.js", function (data){
