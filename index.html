@@ -201,7 +201,7 @@
 			<div id="map"></div>
 
 			<div class="first-column">
-				<h2>What are the Rosenwald Schools?</h2>
+				<h2>THE ROSENWALD SCHOOLS</h2>
 				<p>In 1912, a partnership struck between Booker T. Washington and Julius Rosenwald would spur the
 					construction of nearly five-thousand public school buildings for African American communities in the rural South.
 					Washington was the president of Tuskegee Institute, and Rosenwald, the president of Sears-Roebuck. Their partnership
@@ -214,7 +214,7 @@
 					ranging in function from museums and community centers to repurposed schoolhouse buildings. Unfortunately, within
 					the 15 participating Rosenwald states, it is not always clear which of the 5,357 structures are still extant –
 					especially considering they were mostly built in rural areas.</p><br>
-				<h2>Map and Methods</h2>
+				<h2>MAP, METHODS, AND DATA</h2>
 				<p>The above map represents the current state of knowledge on existing Rosenwald schools across the 15 participating states.
 					Hover the mouse over a school to learn more about its construction costs, which are based on the <a href="http://rosenwald.fisk.edu/archives">archives from Fisk University</a>.
 					The data – aggregated into a single shapefile from a variety of sources including state historic preservation organizations,
@@ -276,6 +276,11 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.js"></script>
 	<script>
 
+		// still want to
+		// get some kind of proportional dot thing that accounts for lots of overlap/clusters
+		// why are 0 cost schools still included
+		//
+
 		// map options
 		var options = {
 			center: [33, -93.5],
@@ -314,18 +319,19 @@
 	        return L.circleMarker(latlng, {
 	          color: 'black',
 	          weight: 1,
-	          fillOpacity: 1,
+	          fillOpacity: 0.8,
+						opacity: 0.9,
 	          radius: 5
 	        });
 	      },
 	      onEachFeature: function(feature,layer) {
 	        var tooltip = "<h4>" + feature.properties.name_hist + "</h4>" + "<b>" + "Location: " + "</b>"+
 					feature.properties.county + ", " + feature.properties.state + "<br>" + "<b>" +
-					"Funded by African Americans: $" + "</b>" + feature.properties.cost_black + "<br>" + "<b>" +
-					"Funded by Rosenwald: $" + "</b>" + feature.properties.cost_rwald + "<br>" + "<b>" +
-					"Funded by Public: $" + "</b>" + feature.properties.cost_pub + "<br>" + "<b>" +
-					"Funded by Whites: $" + "</b>" + feature.properties.cost_white + "<br>" + "<b>" +
-					"Total cost: $" + "</b>" + feature.properties.cost_total
+					"Funded by African Americans: " + "</b>" + "$" + feature.properties.cost_black + "<br>" + "<b>" +
+					"Funded by Rosenwald: " + "</b>" + "$" +feature.properties.cost_rwald + "<br>" + "<b>" +
+					"Funded by Public: " + "</b>" + "$" +feature.properties.cost_pub + "<br>" + "<b>" +
+					"Funded by Whites: " + "</b>" + "$" +feature.properties.cost_white + "<br>" + "<b>" +
+					"Total cost: " + "</b>" + "$" +feature.properties.cost_total
 	        layer.bindTooltip(tooltip);
 	        layer.on('mouseover', function(){
 	          this.openTooltip();
