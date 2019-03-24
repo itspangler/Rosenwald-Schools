@@ -1,4 +1,4 @@
-{
+var schools = {
 "type": "FeatureCollection",
 "name": "rosenwald-schools-short",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4269" } },
