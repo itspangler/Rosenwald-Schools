@@ -8,8 +8,8 @@
 	<link rel='icon' href='https://newmapsplus.github.io/favicon.ico' type='image/x-icon' />
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.css">
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,900i" rel="stylesheet">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+	<!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,900i" rel="stylesheet"> -->
 
 	<style>
 		/*
@@ -115,6 +115,8 @@
 			font-size: 0.9em;
 			font-weight: 300;
 			line-height: 1.3em;
+			text-align: center;
+			font-style: italic;
 		}
 
 		#map {
@@ -148,46 +150,74 @@
 		}
 
 		.legend {
-      padding: 6px 8px;
-      font-size: 1em;
+			padding: 6px 8px;
+			font-size: 1em;
 			font-family: 'Georgia';
-      /* Use transparency to blend elements. */
-      border: 2px solid rgba(244, 244, 244, 0.2);
-      background: rgba(100, 100, 100, 0.9);
-      color: rgba(244, 244, 244, 0.8);
-      border-radius: 5px;
-    }
+			/* Use transparency to blend elements. */
+			border: 2px solid rgba(244, 244, 244, 0.2);
+			background: rgba(100, 100, 100, 0.9);
+			color: rgba(244, 244, 244, 0.8);
+			border-radius: 5px;
+		}
 
 		.legend h3 {
-      font-size: 1.1em;
-      font-weight: normal;
-      color: #ddd;
-      /* Light */
-      margin: 0 0 10px 0;
-    }
+			font-size: 1.1em;
+			font-weight: normal;
+			color: #ddd;
+			/* Light */
+			margin: 0 0 10px 0;
+		}
 
-    .legend span {
-      width: 20px;
-      height: 20px;
-      float: left;
-      margin: 0 10px 4px 0;
-    }
+		.legend span {
+			width: 20px;
+			height: 20px;
+			float: left;
+			margin: 0 10px 4px 0;
+		}
 
-    .legend label {
-      font-size: 1.1em;
-    }
+		.legend label {
+			font-size: 1.1em;
+		}
 
-    .legend label:after {
-      content: '';
-      display: block;
-      clear: both;
-    }
+		.legend label:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+
+		/* Leaflet popup styles */
+
+		.leaflet-tooltip {
+			font-size: 1em;
+			font-family: 'Georgia';
+			padding: 5px 8px;
+		}
+
+		.leaflet-tooltip ul {
+			font-family: 'Georgia';
+			padding: 0px 20px;
+			margin: 0px;
+			line-height: 1.0em;
+			color: #333;
+		}
+
+		.leaflet-tooltip li {
+			margin: 4px 0
+		}
 
 		/* When browser is 900px wide or less */
 		@media screen and (max-width: 900px) {
 
+			h1 {
+				font-size: 2em;
+			}
+
+			h2 {
+				font-size: 1.7em;
+			}
+
 			.first-column,
-			.second-column {
+			.column {
 				width: 100%;
 			}
 		}
@@ -206,78 +236,104 @@
 			<div class="first-column">
 				<h2>THE ROSENWALD SCHOOLS</h2>
 				<p>In 1912, a partnership struck between Booker T. Washington and Julius Rosenwald would spur the
-					construction of nearly five-thousand public school buildings for African American communities in the rural South.
-					Washington was the president of Tuskegee Institute, and Rosenwald, the president of Sears-Roebuck. Their partnership
+					construction of nearly five-thousand public school buildings for African American communities in the rural
+					South.
+					Washington was the president of Tuskegee Institute, and Rosenwald, the president of Sears-Roebuck. Their
+					partnership
 					was based on a model, proposed by Washington and approved by Rosenwald, that would award matching grants to
 					rural black communities who were interested in constructing new educational facilities.</p>
-				<p>Known today as the Rosenwald schools, these buildings served multiple purposes, ranging from traditional educational facilities to community
-					institutions and centers of local cultural events. In addition to traditional schools, the building program also
-				 	helped to construct teachers' homes. Although the Rosenwald building program ended in 1932, the schools
-					remained in popular use until desegregation in 1954. In some cases, Rosenwald structures continue to be utilized today,
-					ranging in function from museums and community centers to repurposed schoolhouse buildings. Unfortunately, within
+				<p>Known today as the Rosenwald schools, these buildings served multiple purposes, ranging from traditional
+					educational facilities to community
+					institutions and centers of local cultural events. In addition to traditional schools, the building program
+					also
+					helped to construct teachers' homes. Although the Rosenwald building program ended in 1932, the schools
+					remained in popular use until desegregation in 1954. In some cases, Rosenwald structures continue to be
+					utilized today,
+					ranging in function from museums and community centers to repurposed schoolhouse buildings. Unfortunately,
+					within
 					the 15 participating Rosenwald states, it is not always clear which of the 5,357 structures are still extant –
 					especially considering they were mostly built in rural areas.</p><br>
 				<h2>MAP, METHODS, AND DATA</h2>
-				<p>The above map represents the current state of knowledge on existing Rosenwald schools across the 15 participating states.
-					Hover the mouse over a school to learn more about its construction costs, which are based on the <a href="http://rosenwald.fisk.edu/archives">archives from Fisk University</a>.
-					The data – aggregated into a single shapefile from a variety of sources including state historic preservation organizations,
-					National Register of Historic Places submissions, and individual research projects – represents 603 Rosenwald structures. This translates to about 11.25% of the orginal schools.
-					I created the dataset during an internship with the National Trust for Historic Preservation during the summer of 2018 using a combination of QGIS and ArcGIS Pro.</p>
-				<p>Consolidating data from many different sources and organizations is one of the foremost challenges in producing a suitable
-					map of the current Rosenwald schools. For example, while Tennessee and Texas both contained many hundreds of Rosenwald schools in the
-					20th century, they are not well represented on the map above. Records of Rosenwald schools were not formally kept in Texas, and Tennessee
-					is still completing a statewide survey of existing schools. Conversely, North Carolina has completed an exceedingly thorough survey
-					of the Rosenwald schools such that this map gives the impression that NC is home to far more Rosenwald schools than other states
-					(which is, of course, not the case in reality). For those reasons, and many others, our current knowledge of Rosenwald schools
+				<p>The above map represents the current state of knowledge on existing Rosenwald schools across the 15
+					participating states.
+					Hover the mouse over a school to learn more about its construction costs, which are based on the <a
+						href="http://rosenwald.fisk.edu/archives">archives from Fisk University</a>.
+					The data – aggregated into a single shapefile from a variety of sources including state historic preservation
+					organizations,
+					National Register of Historic Places submissions, and individual research projects – represents 603 Rosenwald
+					structures. This translates to about 11.25% of the orginal schools.
+					I created the dataset during an internship with the National Trust for Historic Preservation during the summer
+					of 2018 using a combination of QGIS and ArcGIS Pro.</p>
+				<p>Consolidating data from many different sources and organizations is one of the foremost challenges in
+					producing a suitable
+					map of the current Rosenwald schools. For example, while Tennessee and Texas both contained many hundreds of
+					Rosenwald schools in the
+					20th century, they are not well represented on the map above. Records of Rosenwald schools were not formally
+					kept in Texas, and Tennessee
+					is still completing a statewide survey of existing schools. Conversely, North Carolina has completed an
+					exceedingly thorough survey
+					of the Rosenwald schools such that this map gives the impression that NC is home to far more Rosenwald schools
+					than other states
+					(which is, of course, not the case in reality). For those reasons, and many others, our current knowledge of
+					Rosenwald schools
 					remains uneven at best.</p>
-				<p>Read more about the Rosenwald Schools, and efforts to preserve them, at <a href="https://www.arcgis.com/apps/Cascade/index.html?appid=7541c163fb20486598969c7acb559663">this link</a>.</p>
+				<p>Read more about the Rosenwald Schools, and efforts to preserve them, at <a
+						href="https://www.arcgis.com/apps/Cascade/index.html?appid=7541c163fb20486598969c7acb559663">this link</a>.
+				</p>
 				<br>
 
 			</div>
 			<div class="column">
-				<img class="max-image-width" src="https://nthp-savingplaces.s3.amazonaws.com/2015/09/30/19/07/02/786/MTZion_Rosenwald_Clements_mr.jpg" title="Mt. Zion">
+				<img class="max-image-width"
+					src="https://nthp-savingplaces.s3.amazonaws.com/2015/09/30/19/07/02/786/MTZion_Rosenwald_Clements_mr.jpg"
+					title="Mt. Zion">
 				<div class="linkbox">
-					<i><center>The Mt. Zion Rosenwald School in Florence, South Carolina (<a href="https://savingplaces.org/places/rosenwald-schools">Source</a>)</center></i>
+					The Mt. Zion Rosenwald School in Florence, South Carolina (<a
+						href="https://savingplaces.org/places/rosenwald-schools">Source</a>)
 				</div>
 				<br>
-				<img class="max-image-width" src="https://www.teachingforchange.org/wp-content/uploads/2016/06/Rosenwald-School-Frankfort-KY-1957.jpg" title="Electricity and bubbles in a Lexington sunset">
+				<img class="max-image-width"
+					src="https://www.teachingforchange.org/wp-content/uploads/2016/06/Rosenwald-School-Frankfort-KY-1957.jpg"
+					title="A Rosenwald school in Frankfort, Kentucky, 1957">
 				<div class="linkbox">
-					<i><center>A Rosenwald school in Frankfort, Kentucky, 1957 (<a href="https://www.teachingforchange.org/rosenwald-teaching-guide">Source</a>)</center></i>
+					A Rosenwald school in Frankfort, Kentucky, 1957 (<a
+						href="https://www.teachingforchange.org/rosenwald-teaching-guide">Source</a>)
 				</div>
 				<br>
-				<img class="max-image-width" src="https://wfpl.org/wp-content/uploads/2016/02/rosenwald.jpg" title="Electricity and bubbles in a Lexington sunset">
+				<img class="max-image-width" src="https://wfpl.org/wp-content/uploads/2016/02/rosenwald.jpg"
+					title="ulius Rosenwald with students">
 				<div class="linkbox">
-					<i><center>Julius Rosenwald with students (<a href="https://wfpl.org/rosenwald-schools-doc-louisville-kentucky/">Source</a>)</center></i>
+					Julius Rosenwald with students (<a
+						href="https://wfpl.org/rosenwald-schools-doc-louisville-kentucky/">Source</a>)
 				</div>
-				<br>
-				<br>
+
 			</div>
 		</div>
 	</section>
 	<footer>
 		<p><i>Social links</i></p>
 		<ul><i>
-			<li>See my projects on GitHub: <a href="https://github.com/itspangler">Ian Spangler</a></li>
-			<li>Follow me on twitter: <a href="https://twitter.com/itspangler">@itspangler</a></li>
-		</i></ul>
+				<li>See my projects on GitHub: <a href="https://github.com/itspangler">Ian Spangler</a></li>
+				<li>Follow me on twitter: <a href="https://twitter.com/itspangler">@itspangler</a></li>
+			</i></ul>
 		<hr>
 
 		<a href="https://newmapsplus.github.io">
-			<img src="https://newmapsplus.github.io/assets/graphics/logo-2018-nmp-75px-h-gray.png" alt="University of Kentucky Geography">
+			<img src="https://newmapsplus.github.io/assets/graphics/logo-2018-nmp-75px-h-gray.png"
+				alt="University of Kentucky Geography">
 		</a>
 
 		<a href="https://uky-gis.github.io">
-			<img src="https://newmapsplus.github.io/assets/graphics/logo-2018-geography-75px-h.png" alt="University of Kentucky Geography">
+			<img src="https://newmapsplus.github.io/assets/graphics/logo-2018-geography-75px-h.png"
+				alt="University of Kentucky Geography">
 		</a>
 
 	</footer>
-	<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+
 	<script src="https://unpkg.com/simple-statistics@6.1.1/dist/simple-statistics.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.js"></script>
+	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
 	<script>
-
 		// still want to
 		// get some kind of proportional dot thing that accounts for lots of overlap/clusters
 		// why are 0 cost schools still included
@@ -306,8 +362,8 @@
 		};
 
 		map.addControl(L.control.zoom({
-      position: 'topright'
-    }));
+			position: 'topright'
+		}));
 
 		// request some basemap tiles and add to the map
 		var tiles = L.tileLayer(basemap_source, basemap_options).addTo(map);
@@ -321,57 +377,104 @@
 		}
 
 		// draw rosenwald school layer
-		var schoolsLayer = $.getJSON("data/rosenwald-short.geojson", function (data){
+		var schoolsLayer = $.getJSON("data/rosenwald-short.geojson", function (data) {
 			var dataLayer = L.geoJson(data, {
-				pointToLayer: function(feature, latlng) {
-	        return L.circleMarker(latlng, {
-	          color: 'black',
-	          weight: 1,
-	          fillOpacity: 0.8,
+				pointToLayer: function (feature, latlng) {
+					return L.circleMarker(latlng, {
+						color: 'black',
+						weight: 1,
+						fillOpacity: 0.8,
 						opacity: 0.9,
-	          radius: 5
-	        });
-	      },
-				filter: function(feature) {
+						radius: 5
+					});
+				},
+				filter: function (feature) {
 					if ((feature.properties.cost_total) > 0) {
 						return feature;
 					}
 				},
-				style: function(feature) {
+				style: function (feature) {
 					return {
 						radius: getRadius(feature.properties.cost_total)
 					}
 				},
-	      onEachFeature: function(feature,layer) {
-	        var tooltip = "<h4>" + feature.properties.name_hist + "</h4>" + "<p>" + "<b>" + "Location: " + "</b>"+
-					feature.properties.county + ", " + feature.properties.state + "<br>" + "<b>" +
-					"Funded by African Americans: " + "</b>" + "$" + feature.properties.cost_black + "<br>" + "<b>" +
-					"Funded by Rosenwald: " + "</b>" + "$" +feature.properties.cost_rwald + "<br>" + "<b>" +
-					"Funded by Public: " + "</b>" + "$" +feature.properties.cost_pub + "<br>" + "<b>" +
-					"Funded by Whites: " + "</b>" + "$" +feature.properties.cost_white + "<br>" + "<b>" +
-					"Total cost: " + "</b>" + "$" +feature.properties.cost_total + "</p>"
-	        layer.bindTooltip(tooltip);
-	        layer.on('mouseover', function(){
-	          this.openTooltip();
-	        });
-	        layer.on('mouseout', function(){
-	          this.closeTooltip();
-	        });
-					// layer.on('mouseover', function() {
-					// 	layer.setStyle({
-					// 		fillColor: 'red'
-					// 	});
-					// });
-					// layer.on('mouseout', function() {
-					// 	layer.setStyle({
-					// 		fillColor: '#ffff66'
-					// 	});
-					// });
-	      }
-	    })
-			dataLayer.addTo(map)
+				onEachFeature: function (feature, layer) {
+					// var tooltip = "<h4>" + feature.properties.name_hist + "</h4>" + "<p>" + "<b>" + "Location: " + "</b>"+
+					// feature.properties.county + ", " + feature.properties.state + "<br>" + "<b>" +
+					// "Funded by African Americans: " + "</b>" + "$" + feature.properties.cost_black + "<br>" + "<b>" +
+					// "Funded by Rosenwald: " + "</b>" + "$" +feature.properties.cost_rwald + "<br>" + "<b>" +
+					// "Funded by Public: " + "</b>" + "$" +feature.properties.cost_pub + "<br>" + "<b>" +
+					// "Funded by Whites: " + "</b>" + "$" +feature.properties.cost_white + "<br>" + "<b>" +
+					// "Total cost: " + "</b>" + "$" +feature.properties.cost_total + "</p>"
 
+					var props = feature.properties
+
+					var tooltip =
+						"<h4>" + props.name_hist + "</h4><b>Location:</b> " +
+						props.county + ", " + props.state + "<br><b>Funded by</b>" +
+						"<ul><li>African Americans: $" + props.cost_black.toLocaleString() + "</li>" +
+						"<li>Rosenwald: $" + props.cost_rwald.toLocaleString() + "</li>" +
+						"<li>Public: $" + props.cost_pub.toLocaleString() + "</li>" +
+						"<li>Whites: $" + props.cost_white.toLocaleString() + "</li></ul>" +
+						"<b>Total cost: </b>$" + props.cost_total.toLocaleString()
+
+
+
+					layer.bindTooltip(tooltip);
+					layer.on('mouseover', function () {
+						this.openTooltip();
+					});
+					layer.on('mouseout', function () {
+						this.closeTooltip();
+					});
+				}
+			})
+
+			// Get breaks to style sumbol on mouseout
+			var breaks = getClassBreaks(dataLayer);
+
+			// Apply the styles to each layer
+			dataLayer.eachLayer(function (layer) {
+				layer.on('mouseover', function () {
+					layer.setStyle({
+						fillColor: 'red'
+					});
+				});
+
+				layer.on('mouseout', function() {
+						layer.setStyle({
+							fillColor: getColor(layer.feature.properties[attributeValue], breaks)
+						});
+					});
+			});
+
+			dataLayer.addTo(map)
 			drawMap(dataLayer);
+
+			//  disable unless you can explain what is happening
+			map.on('click', function (e) {
+				dataLayer.eachLayer(function (layer) {
+				var distance = e.latlng.distanceTo(layer.getLatLng()) / 1000;
+
+				if (distance > 200) {
+					layer.setStyle({
+						stroke: true,
+						fill: true,
+						fillOpacity: 0.3,
+						opacity: 0.3
+					});
+				
+				} else {
+					layer.setStyle({
+						stroke: true,
+						fill: true,
+						opacity: 1,
+						fillOpacity: 1
+					});
+				
+				} // end else
+			});
+		});
 
 		});
 
@@ -380,129 +483,128 @@
 		// });
 
 		// draw state overlay for boundaries
-    $.when(schoolsLayer).done(function () {
-      // load, filter, and style the state outline
-      $.getJSON("data/states-short.geojson", function (data) {
+		$.when(schoolsLayer).done(function () {
+			// load, filter, and style the state outline
+			$.getJSON("data/states-short.geojson", function (data) {
 
-        var stateLayer = L.geoJson(data, {
-          style: function (feature) {
-            return {
-              color: '#444',
-              weight: 1,
-              fillOpacity: 0,
-              interactive: false
-            };
-          },
-        });
+				var stateLayer = L.geoJson(data, {
+					style: function (feature) {
+						return {
+							color: '#444',
+							weight: 1,
+							fillOpacity: 0,
+							interactive: false
+						};
+					},
+				});
 
-        // Add layer to map!
-        stateLayer.addTo(map).bringToBack()
+				// Add layer to map!
+				stateLayer.addTo(map).bringToBack()
 
-      });
-    });
+			});
+		});
 
-		map.on('click', function(e) {
-      schoolsLayer.eachLayer(function(layer) {
-        var distance = e.latlng.distanceTo(layer.getLatLng())/1000;
+		// map.on('click', function (e) {
+		// 	schoolsLayer.eachLayer(function (layer) {
+		// 		var distance = e.latlng.distanceTo(layer.getLatLng()) / 1000;
 
-        if(distance > 1) {
-          layer.setStyle({
-            stroke: true,
-            fill: true,
-            fillOpacity: 0.1,
-            opacity: 0.1
-          });
-        } else {
-          layer.setStyle({
-            stroke: true,
-            fill: true,
-            opacity: 1,
-            fillOpacity: 1
-          });
-        } // end else
-      });
-    });
+		// 		if (distance > 1) {
+		// 			layer.setStyle({
+		// 				stroke: true,
+		// 				fill: true,
+		// 				fillOpacity: 0.1,
+		// 				opacity: 0.1
+		// 			});
+		// 		} else {
+		// 			layer.setStyle({
+		// 				stroke: true,
+		// 				fill: true,
+		// 				opacity: 1,
+		// 				fillOpacity: 1
+		// 			});
+		// 		} // end else
+		// 	});
+		// });
 
 		// *********** Functions below here *********** //
 
 		// define function for coloring points
-    function drawMap(dataLayer) {
-      var breaks = getClassBreaks(dataLayer);
-      // after you get the class breaks, call the legend function
-      drawLegend(breaks)
-      dataLayer.eachLayer(function (layer) {
-        var props = layer.feature.properties;
-        layer.setStyle({
-          fillColor: getColor(props[attributeValue], breaks)
-        });
-      });
-    }
+		function drawMap(dataLayer) {
+			var breaks = getClassBreaks(dataLayer);
+			// after you get the class breaks, call the legend function
+			drawLegend(breaks)
+			dataLayer.eachLayer(function (layer) {
+				var props = layer.feature.properties;
+				layer.setStyle({
+					fillColor: getColor(props[attributeValue], breaks)
+				});
+			});
+		}
 
 		// define function for getting class breaks
-    function getClassBreaks(dataLayer) {
-      // create empty Array for storing values
-      var values = [];
-      // loop through all the counties
-      dataLayer.eachLayer(function (layer) {
-        var props = layer.feature.properties;
-        var value = props[attributeValue];
-        if (value != 0) { // Check for 0 values
-          values.push(Number(value)); // Add as number
-        }
-      });;
-			console.log(values)// verify in the Console
-      // determine similar clusters
+		function getClassBreaks(dataLayer) {
+			// create empty Array for storing values
+			var values = [];
+			// loop through all the counties
+			dataLayer.eachLayer(function (layer) {
+				var props = layer.feature.properties;
+				var value = props[attributeValue];
+				if (value != 0) { // Check for 0 values
+					values.push(Number(value)); // Add as number
+				}
+			});;
+			console.log(values) // verify in the Console
+			// determine similar clusters
 
-      var clusters = ss.ckmeans(values, 5);
+			var clusters = ss.ckmeans(values, 5);
 
-      // create an array of the lowest value within each cluster
-      var breaks = clusters.map(function (cluster) {
-        // console.log(cluster)
-        return [cluster[0], cluster.pop()];
-      });
-      // console.log(breaks); // verify your break values
-      return breaks; // return Array of class breaks
-    } // end getClassBreaks function
+			// create an array of the lowest value within each cluster
+			var breaks = clusters.map(function (cluster) {
+				// console.log(cluster)
+				return [cluster[0], cluster.pop()];
+			});
+			// console.log(breaks); // verify your break values
+			return breaks; // return Array of class breaks
+		} // end getClassBreaks function
 
 		function drawLegend(breaks) {
 
-      // create the Leaflet control and position
-      var legend = L.control({
-        position: 'topleft'
-      });
+			// create the Leaflet control and position
+			var legend = L.control({
+				position: 'topleft'
+			});
 
-      // when it's added to the map
-      legend.onAdd = function () {
-        var div = L.DomUtil.create('div', 'legend');
-        div.innerHTML = "<h4>" + 'Rosenwald Schools by Cost' + "</h4>";
-        for (var i = 0; i < breaks.length; i++) { // keep all breaks
-          var color = getColor(breaks[i][0], breaks);
-          div.innerHTML +=
-            '<span style="background:' + color + '"></span> ' +
-            '<label>' + "$" + (breaks[i][0]).toLocaleString() + ' &mdash; ' + "$" +
-            (breaks[i][1]).toLocaleString() + '</label>';
-        }
-        return div;
-      }; // end onAdd method
-      // add the legend to the map
-      legend.addTo(map);
-    }
+			// when it's added to the map
+			legend.onAdd = function () {
+				var div = L.DomUtil.create('div', 'legend');
+				div.innerHTML = "<h4>" + 'Rosenwald Schools by Cost' + "</h4>";
+				for (var i = 0; i < breaks.length; i++) { // keep all breaks
+					var color = getColor(breaks[i][0], breaks);
+					div.innerHTML +=
+						'<span style="background:' + color + '"></span> ' +
+						'<label>' + "$" + (breaks[i][0]).toLocaleString() + ' &mdash; ' + "$" +
+						(breaks[i][1]).toLocaleString() + '</label>';
+				}
+				return div;
+			}; // end onAdd method
+			// add the legend to the map
+			legend.addTo(map);
+		}
 
 		// define get color function
-    function getColor(d, breaks) {
-      if (d <= breaks[0][1]) { // Use less than or equal. The '==' matches exactly 560.
-        return '#f0f9e8'; // Of course change to your fav 6-color gradient
-      } else if (d <= breaks[1][1]) {
-        return '#bae4bc';
-      } else if (d <= breaks[2][1]) {
-        return '#7bccc4';
-      } else if (d <= breaks[3][1]) {
-        return '#43a2ca';
-      } else if (d <= breaks[4][1]) {
-        return '#0868ac'
-      }
-    } // end getColor
-
+		function getColor(d, breaks) {
+			if (d <= breaks[0][1]) { // Use less than or equal. The '==' matches exactly 560.
+				return '#f0f9e8'; // Of course change to your fav 6-color gradient
+			} else if (d <= breaks[1][1]) {
+				return '#bae4bc';
+			} else if (d <= breaks[2][1]) {
+				return '#7bccc4';
+			} else if (d <= breaks[3][1]) {
+				return '#43a2ca';
+			} else if (d <= breaks[4][1]) {
+				return '#0868ac'
+			}
+		} // end getColor
 	</script>
 </body>
 
