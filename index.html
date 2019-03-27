@@ -451,6 +451,31 @@
 			dataLayer.addTo(map)
 			drawMap(dataLayer);
 
+			//  disable unless you can explain what is happening
+			map.on('click', function (e) {
+				dataLayer.eachLayer(function (layer) {
+				var distance = e.latlng.distanceTo(layer.getLatLng()) / 1000;
+
+				if (distance > 200) {
+					layer.setStyle({
+						stroke: true,
+						fill: true,
+						fillOpacity: 0.3,
+						opacity: 0.3
+					});
+				
+				} else {
+					layer.setStyle({
+						stroke: true,
+						fill: true,
+						opacity: 1,
+						fillOpacity: 1
+					});
+				
+				} // end else
+			});
+		});
+
 		});
 
 		// schoolsLayer.features.sort(function(a, b) {
@@ -479,27 +504,27 @@
 			});
 		});
 
-		map.on('click', function (e) {
-			schoolsLayer.eachLayer(function (layer) {
-				var distance = e.latlng.distanceTo(layer.getLatLng()) / 1000;
+		// map.on('click', function (e) {
+		// 	schoolsLayer.eachLayer(function (layer) {
+		// 		var distance = e.latlng.distanceTo(layer.getLatLng()) / 1000;
 
-				if (distance > 1) {
-					layer.setStyle({
-						stroke: true,
-						fill: true,
-						fillOpacity: 0.1,
-						opacity: 0.1
-					});
-				} else {
-					layer.setStyle({
-						stroke: true,
-						fill: true,
-						opacity: 1,
-						fillOpacity: 1
-					});
-				} // end else
-			});
-		});
+		// 		if (distance > 1) {
+		// 			layer.setStyle({
+		// 				stroke: true,
+		// 				fill: true,
+		// 				fillOpacity: 0.1,
+		// 				opacity: 0.1
+		// 			});
+		// 		} else {
+		// 			layer.setStyle({
+		// 				stroke: true,
+		// 				fill: true,
+		// 				opacity: 1,
+		// 				fillOpacity: 1
+		// 			});
+		// 		} // end else
+		// 	});
+		// });
 
 		// *********** Functions below here *********** //
 
