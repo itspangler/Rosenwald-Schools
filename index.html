@@ -383,11 +383,11 @@
 					var tooltip = 
 					"<h4>" + props.name_hist + "</h4><b>Location:</b> " +
 					props.county + ", " + props.state + "<br><b>Funded by</b>" +
-					"<ul><li>African Americans: $"+ props.cost_black + "</li>" +
-					"<li>Rosenwald: $" + props.cost_rwald + "</li>" +
-					"<li>Public: $" + props.cost_pub + "</li>" +
-					"<li>Whites: $" + props.cost_white + "</li></ul>" +
-					"<b>Total cost: </b>$" +props.cost_total
+					"<ul><li>African Americans: $"+ props.cost_black.toLocaleString() + "</li>" +
+					"<li>Rosenwald: $" + props.cost_rwald.toLocaleString() + "</li>" +
+					"<li>Public: $" + props.cost_pub.toLocaleString() + "</li>" +
+					"<li>Whites: $" + props.cost_white.toLocaleString() + "</li></ul>" +
+					"<b>Total cost: </b>$" +props.cost_total.toLocaleString()
 
 
 
