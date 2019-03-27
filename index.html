@@ -185,6 +185,25 @@
       clear: both;
     }
 
+		/* Leaflet popup styles */
+
+		.leaflet-tooltip {
+			font-size: 1em;
+			font-family: 'Georgia';
+			padding: 5px 8px;
+		}
+
+		.leaflet-tooltip ul {
+			font-family: 'Georgia';
+			padding: 0px 20px;
+			margin: 0px;
+			line-height: 1.0em;
+			color: #333;
+		}
+		.leaflet-tooltip li {
+			margin: 4px 0
+		}
+
 		/* When browser is 900px wide or less */
 		@media screen and (max-width: 900px) {
 
@@ -351,13 +370,27 @@
 					}
 				},
 	      onEachFeature: function(feature,layer) {
-	        var tooltip = "<h4>" + feature.properties.name_hist + "</h4>" + "<p>" + "<b>" + "Location: " + "</b>"+
-					feature.properties.county + ", " + feature.properties.state + "<br>" + "<b>" +
-					"Funded by African Americans: " + "</b>" + "$" + feature.properties.cost_black + "<br>" + "<b>" +
-					"Funded by Rosenwald: " + "</b>" + "$" +feature.properties.cost_rwald + "<br>" + "<b>" +
-					"Funded by Public: " + "</b>" + "$" +feature.properties.cost_pub + "<br>" + "<b>" +
-					"Funded by Whites: " + "</b>" + "$" +feature.properties.cost_white + "<br>" + "<b>" +
-					"Total cost: " + "</b>" + "$" +feature.properties.cost_total + "</p>"
+	        // var tooltip = "<h4>" + feature.properties.name_hist + "</h4>" + "<p>" + "<b>" + "Location: " + "</b>"+
+					// feature.properties.county + ", " + feature.properties.state + "<br>" + "<b>" +
+					// "Funded by African Americans: " + "</b>" + "$" + feature.properties.cost_black + "<br>" + "<b>" +
+					// "Funded by Rosenwald: " + "</b>" + "$" +feature.properties.cost_rwald + "<br>" + "<b>" +
+					// "Funded by Public: " + "</b>" + "$" +feature.properties.cost_pub + "<br>" + "<b>" +
+					// "Funded by Whites: " + "</b>" + "$" +feature.properties.cost_white + "<br>" + "<b>" +
+					// "Total cost: " + "</b>" + "$" +feature.properties.cost_total + "</p>"
+
+					var props = feature.properties
+
+					var tooltip = 
+					"<h4>" + props.name_hist + "</h4><b>Location:</b> " +
+					props.county + ", " + props.state + "<br><b>Funded by</b>" +
+					"<ul><li>African Americans: $"+ props.cost_black + "</li>" +
+					"<li>Rosenwald: $" + props.cost_rwald + "</li>" +
+					"<li>Public: $" + props.cost_pub + "</li>" +
+					"<li>Whites: $" + props.cost_white + "</li></ul>" +
+					"<b>Total cost: </b>$" +props.cost_total
+
+
+
 	        layer.bindTooltip(tooltip);
 	        layer.on('mouseover', function(){
 	          this.openTooltip();
