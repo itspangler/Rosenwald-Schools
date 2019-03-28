@@ -421,8 +421,8 @@
 					layer.on('mouseout', function () {
 						this.closeTooltip();
 					});
-					layer.on('click', function(e){
-					    map.setView(e.latlng, 15);
+					layer.on('click', function(e){ // zoom to point function -- giving me some trouble, though -- when you are zoomed out very far, it will zoom to where you clicked on the point, rather than its centroid -- which many times doesn't actually bring the point into frame...
+							map.flyTo(e.latlng, 12);
 					});
 				}
 			})
@@ -450,10 +450,6 @@
 
 		});
 
-		// schoolsLayer.features.sort(function(a, b) {
-		// 	return b.properties.cost_total - a.properties.cost_total;
-		// });
-
 		// draw state overlay for boundaries
 		$.when(schoolsLayer).done(function () {
 			// load, filter, and style the state outline
@@ -476,27 +472,6 @@
 
 			});
 		});
-		// map.on('click', function (e) {
-		// 	schoolsLayer.eachLayer(function (layer) {
-		// 		var distance = e.latlng.distanceTo(layer.getLatLng()) / 1000;
-
-		// 		if (distance > 1) {
-		// 			layer.setStyle({
-		// 				stroke: true,
-		// 				fill: true,
-		// 				fillOpacity: 0.1,
-		// 				opacity: 0.1
-		// 			});
-		// 		} else {
-		// 			layer.setStyle({
-		// 				stroke: true,
-		// 				fill: true,
-		// 				opacity: 1,
-		// 				fillOpacity: 1
-		// 			});
-		// 		} // end else
-		// 	});
-		// });
 
 		// *********** Functions below here *********** //
 
@@ -565,8 +540,8 @@
 
 		// define get color function
 		function getColor(d, breaks) {
-			if (d <= breaks[0][1]) { // Use less than or equal. The '==' matches exactly 560.
-				return '#f0f9e8'; // Of course change to your fav 6-color gradient
+			if (d <= breaks[0][1]) {
+				return '#f0f9e8';
 			} else if (d <= breaks[1][1]) {
 				return '#bae4bc';
 			} else if (d <= breaks[2][1]) {
