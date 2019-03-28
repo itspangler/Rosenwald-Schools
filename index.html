@@ -422,7 +422,7 @@
 						this.closeTooltip();
 					});
 					layer.on('click', function(e){ // zoom to point function -- giving me some trouble, though -- when you are zoomed out very far, it will zoom to where you clicked on the point, rather than its centroid -- which many times doesn't actually bring the point into frame...
-							map.flyTo(e.latlng, 12);
+							map.flyTo(e.latlng, 12); // updated to flyTo as opposed to setView -- better? kind of...
 					});
 				}
 			})
