@@ -342,11 +342,6 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
 	<script>
-		// still want to
-		// get some kind of proportional dot thing that accounts for lots of overlap/clusters
-		// why are 0 cost schools still included
-		// fix mouseout color dynamically
-		// sort points so that high cost are on top
 
 		// map options
 		var options = {
@@ -407,13 +402,6 @@
 					}
 				},
 				onEachFeature: function (feature, layer) {
-					// var tooltip = "<h4>" + feature.properties.name_hist + "</h4>" + "<p>" + "<b>" + "Location: " + "</b>"+
-					// feature.properties.county + ", " + feature.properties.state + "<br>" + "<b>" +
-					// "Funded by African Americans: " + "</b>" + "$" + feature.properties.cost_black + "<br>" + "<b>" +
-					// "Funded by Rosenwald: " + "</b>" + "$" +feature.properties.cost_rwald + "<br>" + "<b>" +
-					// "Funded by Public: " + "</b>" + "$" +feature.properties.cost_pub + "<br>" + "<b>" +
-					// "Funded by Whites: " + "</b>" + "$" +feature.properties.cost_white + "<br>" + "<b>" +
-					// "Total cost: " + "</b>" + "$" +feature.properties.cost_total + "</p>"
 
 					var props = feature.properties
 
@@ -425,7 +413,7 @@
 						"<li>Public: $" + props.cost_pub.toLocaleString() + "</li>" +
 						"<li>Whites: $" + props.cost_white.toLocaleString() + "</li></ul>" +
 						"<b>Total cost: </b>$" + props.cost_total.toLocaleString()
-						
+
 					layer.bindTooltip(tooltip);
 					layer.on('mouseover', function () {
 						this.openTooltip();
@@ -433,9 +421,12 @@
 					layer.on('mouseout', function () {
 						this.closeTooltip();
 					});
+					layer.on('click', function(e){
+					    map.setView(e.latlng, 15);
+					});
 				}
 			})
-
+			console.log(schoolsLayer)
 			// Get breaks to style sumbol on mouseout
 			var breaks = getClassBreaks(dataLayer);
 
@@ -456,14 +447,6 @@
 
 			dataLayer.addTo(map)
 			drawMap(dataLayer);
-
-			//  disable unless you can explain what is happening
-			map.on('click', function (e) {
-				dataLayer.eachLayer(function (layer) {
-				var schoolLatLong =
-				} // end else
-			});
-		});
 
 		});
 
