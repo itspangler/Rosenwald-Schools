@@ -241,7 +241,15 @@
 					Washington was the president of Tuskegee Institute, and Rosenwald, the president of Sears-Roebuck. Their
 					partnership
 					was based on a model, proposed by Washington and approved by Rosenwald, that would award matching grants to
-					rural black communities who were interested in constructing new educational facilities.</p>
+					rural black communities who were interested in constructing new educational facilities. For example, one of the earliest
+					Rosenwald schools was the <a href ="http://rosenwald.fisk.edu/index.php?module=search.details&set_v=aWQ9MzU1&school_county=macon&school_state=AL&button=Search&o=0"
+					target="_blank">Notasulga School</a> in Macon County, Alabama, for which Rosenwald offered a $300 grant and the community fundraised $342.
+					Funds could be raised with cash or with other contributions, like providing labor.</p>
+				<p>This funding model and philosophy were based on Washington's (controversial) philosophy of "self-help," in which he felt
+					the best way for black Americans to achieve racial justice was slowly, incrementally, and through individual hard work.
+					In addition to black communities and Rosenwald grants, the schools were funded by public revenue and, less frequently, white allies.
+					All told, the public investment represented 64% – or $17.7 million – of the total funding for the schools, making these
+					buildings one of the largest public investments in black education in US American history.</p>
 				<p>Known today as the Rosenwald schools, these buildings served multiple purposes, ranging from traditional
 					educational facilities to community
 					institutions and centers of local cultural events. In addition to traditional schools, the building program
@@ -257,7 +265,7 @@
 				<p>The above map represents the current state of knowledge on existing Rosenwald schools across the 15
 					participating states.
 					Hover the mouse over a school to learn more about its construction costs, which are based on the <a
-						href="http://rosenwald.fisk.edu/archives">archives from Fisk University</a>.
+						href="http://rosenwald.fisk.edu/archives" target="_blank">archives from Fisk University</a>.
 					The data – aggregated into a single shapefile from a variety of sources including state historic preservation
 					organizations,
 					National Register of Historic Places submissions, and individual research projects – represents 603 Rosenwald
@@ -278,7 +286,7 @@
 					Rosenwald schools
 					remains uneven at best.</p>
 				<p>Read more about the Rosenwald Schools, and efforts to preserve them, at <a
-						href="https://www.arcgis.com/apps/Cascade/index.html?appid=7541c163fb20486598969c7acb559663">this link</a>.
+						href="https://www.arcgis.com/apps/Cascade/index.html?appid=7541c163fb20486598969c7acb559663" target="_blank">this link</a>.
 				</p>
 				<br>
 
@@ -289,7 +297,7 @@
 					title="Mt. Zion">
 				<div class="linkbox">
 					The Mt. Zion Rosenwald School in Florence, South Carolina (<a
-						href="https://savingplaces.org/places/rosenwald-schools">Source</a>)
+						href="https://savingplaces.org/places/rosenwald-schools" target="_blank">Source</a>)
 				</div>
 				<br>
 				<img class="max-image-width"
@@ -297,14 +305,14 @@
 					title="A Rosenwald school in Frankfort, Kentucky, 1957">
 				<div class="linkbox">
 					A Rosenwald school in Frankfort, Kentucky, 1957 (<a
-						href="https://www.teachingforchange.org/rosenwald-teaching-guide">Source</a>)
+						href="https://www.teachingforchange.org/rosenwald-teaching-guide" target="_blank">Source</a>)
 				</div>
 				<br>
 				<img class="max-image-width" src="https://wfpl.org/wp-content/uploads/2016/02/rosenwald.jpg"
 					title="ulius Rosenwald with students">
 				<div class="linkbox">
 					Julius Rosenwald with students (<a
-						href="https://wfpl.org/rosenwald-schools-doc-louisville-kentucky/">Source</a>)
+						href="https://wfpl.org/rosenwald-schools-doc-louisville-kentucky/" target="_blank">Source</a>)
 				</div>
 
 			</div>
@@ -417,9 +425,7 @@
 						"<li>Public: $" + props.cost_pub.toLocaleString() + "</li>" +
 						"<li>Whites: $" + props.cost_white.toLocaleString() + "</li></ul>" +
 						"<b>Total cost: </b>$" + props.cost_total.toLocaleString()
-
-
-
+						
 					layer.bindTooltip(tooltip);
 					layer.on('mouseover', function () {
 						this.openTooltip();
@@ -454,24 +460,7 @@
 			//  disable unless you can explain what is happening
 			map.on('click', function (e) {
 				dataLayer.eachLayer(function (layer) {
-				var distance = e.latlng.distanceTo(layer.getLatLng()) / 1000;
-
-				if (distance > 200) {
-					layer.setStyle({
-						stroke: true,
-						fill: true,
-						fillOpacity: 0.3,
-						opacity: 0.3
-					});
-				
-				} else {
-					layer.setStyle({
-						stroke: true,
-						fill: true,
-						opacity: 1,
-						fillOpacity: 1
-					});
-				
+				var schoolLatLong =
 				} // end else
 			});
 		});
@@ -497,13 +486,13 @@
 						};
 					},
 				});
+				console.log(stateLayer)
 
 				// Add layer to map!
 				stateLayer.addTo(map).bringToBack()
 
 			});
 		});
-
 		// map.on('click', function (e) {
 		// 	schoolsLayer.eachLayer(function (layer) {
 		// 		var distance = e.latlng.distanceTo(layer.getLatLng()) / 1000;
@@ -577,7 +566,7 @@
 			// when it's added to the map
 			legend.onAdd = function () {
 				var div = L.DomUtil.create('div', 'legend');
-				div.innerHTML = "<h4>" + 'Rosenwald Schools by Cost' + "</h4>";
+				div.innerHTML = "<h4>" + 'Rosenwald Schools by' + '<br>' + 'Construction Cost' + "</h4>" + "<br>";
 				for (var i = 0; i < breaks.length; i++) { // keep all breaks
 					var color = getColor(breaks[i][0], breaks);
 					div.innerHTML +=
@@ -605,6 +594,7 @@
 				return '#0868ac'
 			}
 		} // end getColor
+
 	</script>
 </body>
 
