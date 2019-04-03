@@ -316,6 +316,7 @@
 				<br>
 			</div>
 			<div class="column">
+				<div id="contentSum"></div>
 				<img class="max-image-width"
 					src="https://nthp-savingplaces.s3.amazonaws.com/2015/09/30/19/07/02/786/MTZion_Rosenwald_Clements_mr.jpg"
 					title="Mt. Zion">
@@ -411,11 +412,26 @@
 		var geoJsonLayer,
 			listOfSchools,
 			listOfFunding = {
-				"cost_black": 0,
-				"cost_pub": 0,
-				"cost_rwald": 0,
-				"cost_white": 0,
-				"cost_total": 0
+				"cost_black": {
+					"cost": 0,
+					"name": "African American"
+				},
+				"cost_pub": {
+					"cost": 0,
+					"name": "Public"
+				},
+				"cost_rwald": {
+					"cost": 0,
+					"name": "Rosenwald"
+				},
+				"cost_white": {
+					"cost": 0,
+					"name": "White"
+				},
+				"cost_total": {
+					"cost": 0,
+					"name": "Total"
+				},
 			}
 
 		// draw rosenwald school layer
@@ -490,21 +506,21 @@
 		});
 
 		var radiusCircle = L.circle([0, 0], 80467.2, {
-            fillColor: 'white',
-            fillOpacity: .1,
-            color: 'yellow',
-            opacity: .3,
-            stroke: false,
-            weight: 3,
-        }).addTo(map);
+			fillColor: 'white',
+			fillOpacity: .1,
+			color: 'yellow',
+			opacity: .3,
+			stroke: false,
+			weight: 3,
+		}).addTo(map);
 
 		map.on('click', function (e) {
 			map.flyTo(e.latlng, 8, {
 				animate: true
 			});
-			
+
 			for (i in listOfFunding) {
-				listOfFunding[i] = 0
+				listOfFunding[i].cost = 0
 			}
 
 			geoJsonLayer.eachLayer(function (layer) {
@@ -525,15 +541,28 @@
 					for (i in listOfFunding) {
 						for (j in props) {
 							if (j == i) {
-								listOfFunding[i] += props[j]
+								listOfFunding[i].cost += props[j]
 							}
 						}
 					}
-				}	
+				}
 
 			})
 			radiusCircle.setLatLng(e.latlng)
+			var contentSum =
+				"<h2>Total funding source within 50 miles of click</h2><ul><li>African Americans: $" +
+				listOfFunding.cost_black.cost.toLocaleString() + "</li>" +
+				"<li>Rosenwald: $" + listOfFunding.cost_rwald.cost.toLocaleString() + "</li>" +
+				"<li>Public: $" + listOfFunding.cost_pub.cost.toLocaleString() + "</li>" +
+				"<li>Whites: $" + listOfFunding.cost_white.cost.toLocaleString() + "</li>" +
+				"<li><b>Total cost: </b>$" + listOfFunding.cost_total.cost.toLocaleString() + "</li></ul>"
+			
+			document.getElementById("contentSum").innerHTML=contentSum
+
+
 		});
+
+
 
 
 		// draw state overlay for boundaries
