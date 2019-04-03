@@ -411,6 +411,7 @@
 		}
 		var geoJsonLayer,
 			listOfSchools,
+			contentSum = "",
 			listOfFunding = {
 				"cost_black": {
 					"cost": 0,
@@ -479,6 +480,27 @@
 					// layer.on('click', function(e){ // zoom to point function -- giving me some trouble, though -- when you are zoomed out very far, it will zoom to where you clicked on the point, rather than its centroid -- which many times doesn't actually bring the point into frame...
 					// 		map.flyTo(e.latlng, 10); // updated to flyTo as opposed to setView -- better? kind of...
 					// });
+					// nested loop to add up funding
+
+					for (i in listOfFunding) {
+						for (j in props) {
+							if (j == i) {
+								listOfFunding[i].cost += props[j]
+							}
+						}
+					}
+
+					contentSum =
+						"<h2>Total funding by source</h2><ul><li>African Americans: $" +
+						listOfFunding.cost_black.cost.toLocaleString() + "</li>" +
+						"<li>Rosenwald: $" + listOfFunding.cost_rwald.cost.toLocaleString() + "</li>" +
+						"<li>Public: $" + listOfFunding.cost_pub.cost.toLocaleString() + "</li>" +
+						"<li>Whites: $" + listOfFunding.cost_white.cost.toLocaleString() + "</li>" +
+						"<li><b>Total from all sources: </b>$" + listOfFunding.cost_total.cost
+						.toLocaleString() + "</li></ul>"
+
+					document.getElementById("contentSum").innerHTML = contentSum
+
 				}
 			})
 
@@ -549,15 +571,15 @@
 
 			})
 			radiusCircle.setLatLng(e.latlng)
-			var contentSum =
-				"<h2>Total funding source within 50 miles of click</h2><ul><li>African Americans: $" +
+			contentSum =
+				"<h2>Funding within 50 miles</h2><ul><li>African Americans: $" +
 				listOfFunding.cost_black.cost.toLocaleString() + "</li>" +
 				"<li>Rosenwald: $" + listOfFunding.cost_rwald.cost.toLocaleString() + "</li>" +
 				"<li>Public: $" + listOfFunding.cost_pub.cost.toLocaleString() + "</li>" +
 				"<li>Whites: $" + listOfFunding.cost_white.cost.toLocaleString() + "</li>" +
 				"<li><b>Total cost: </b>$" + listOfFunding.cost_total.cost.toLocaleString() + "</li></ul>"
-			
-			document.getElementById("contentSum").innerHTML=contentSum
+
+			document.getElementById("contentSum").innerHTML = contentSum
 
 
 		});
