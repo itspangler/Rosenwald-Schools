@@ -383,10 +383,12 @@
 			var radius = Math.sqrt(area / Math.PI);
 			return radius * .12;
 		}
+		var geoJsonLayer,
+			listOfSchools
 
 		// draw rosenwald school layer
 		var schoolsLayer = $.getJSON("data/rosenwald-short.geojson", function (data) {
-			var dataLayer = L.geoJson(data, {
+			geoJsonLayer= L.geoJson(data, {
 				pointToLayer: function (feature, latlng) {
 					return L.circleMarker(latlng, {
 						color: 'black',
@@ -432,15 +434,11 @@
 				}
 			})
 
-			map.on('click', function(e){ // zoom to point function -- giving me some trouble, though -- when you are zoomed out very far, it will zoom to where you clicked on the point, rather than its centroid -- which many times doesn't actually bring the point into frame...
-							map.flyTo(e.latlng, 10, {animate: true}); // updated to flyTo as opposed to setView -- better? kind of...
-					});
-			console.log(schoolsLayer)
 			// Get breaks to style sumbol on mouseout
-			var breaks = getClassBreaks(dataLayer);
+			var breaks = getClassBreaks(geoJsonLayer);
 
 			// Apply the styles to each layer
-			dataLayer.eachLayer(function (layer) {
+			geoJsonLayer.eachLayer(function (layer) {
 				layer.on('mouseover', function () {
 					layer.setStyle({
 						fillColor: 'red'
@@ -454,10 +452,22 @@
 					});
 			});
 
-			dataLayer.addTo(map)
-			drawMap(dataLayer);
+			
+			geoJsonLayer.addTo(map)
+			drawMap(geoJsonLayer);
 
 		});
+
+		map.on('click', function(e){ 
+				map.flyTo(e.latlng, 8, {animate: true}); 
+				geoJsonLayer.eachLayer(function (layer){
+					var distance = e.latlng.distanceTo(layer.getLatLng()) / 1000;
+					console.log(distance)
+				})
+				});
+			console.log(schoolsLayer)
+			
+
 
 		// draw state overlay for boundaries
 		$.when(schoolsLayer).done(function () {
@@ -508,7 +518,7 @@
 				if (value != 0) { // Check for 0 values
 					values.push(Number(value)); // Add as number
 				}
-			});;
+			});
 			console.log(values) // verify in the Console
 			// determine similar clusters
 
