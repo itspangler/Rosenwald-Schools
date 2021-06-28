@@ -35,7 +35,7 @@ h1 {
   letter-spacing: .02em;
   margin: 5px 0;
   text-align: center;
-  text-shadow: 2px 2px 2px #43a2ca;
+  /* text-shadow: 2px 2px 2px #43a2ca; */
 
 }
 
@@ -46,7 +46,7 @@ h2 {
   letter-spacing: .02em;
   font-style: normal;
   margin: 5px 0;
-  text-shadow: 2px 2px 2px #bae4bc;
+  /* text-shadow: 2px 2px 3px #43a2ca; */
 }
 
 h3 {
