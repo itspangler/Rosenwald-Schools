@@ -10,13 +10,13 @@ var map = L.map('map', options);
 
 // Leaflet providers base map URL
 var basemap_source =
-  'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/dark_all/{z}/{x}/{y}.png'
+  'https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png'
 
 // Leaflet providers attributes
 var basemap_options = {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
   subdomains: 'abcd',
-  maxZoom: 19
+  maxZoom: 10
 };
 
 map.addControl(L.control.zoom({
@@ -78,7 +78,7 @@ var schoolsLayer = $.getJSON("data/rosenwald-short.geojson", function(data) {
       });
       layer.on('click', function(
       e) { // zoom to point function -- giving me some trouble, though -- when you are zoomed out very far, it will zoom to where you clicked on the point, rather than its centroid -- which many times doesn't actually bring the point into frame...
-        map.flyTo(e.latlng, 12); // updated to flyTo as opposed to setView -- better? kind of...
+        map.setView(e.latlng, 10); // updated to flyTo as opposed to setView -- better? kind of...
       });
     }
   })
@@ -114,9 +114,9 @@ $.when(schoolsLayer).done(function() {
     var stateLayer = L.geoJson(data, {
       style: function(feature) {
         return {
-          color: '#444',
+          color: '#bdbbb7',
           weight: 1,
-          fillOpacity: 0,
+          fillOpacity: 0.1,
           interactive: false
         };
       },
