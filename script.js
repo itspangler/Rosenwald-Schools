@@ -16,7 +16,8 @@ var basemap_source =
 var basemap_options = {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
   subdomains: 'abcd',
-  maxZoom: 10
+  maxZoom: 10,
+  minZoom: 4
 };
 
 map.addControl(L.control.zoom({
@@ -123,8 +124,9 @@ $.when(schoolsLayer).done(function() {
     });
     console.log(stateLayer)
 
-    // Add layer to map!
-    stateLayer.addTo(map).bringToBack()
+    // Add layer to map
+    stateLayer.addTo(map).bringToBack();
+    map.setMaxBounds(map.getBounds(stateLayer));
 
   });
 });

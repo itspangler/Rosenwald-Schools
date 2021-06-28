@@ -7,7 +7,21 @@ body {
   font-size: 100%;
 }
 
-header,
+header {
+  width: 80%;
+  margin: 10px auto;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+.sticky + .content {
+  padding-top: 102px;
+}
+
 section,
 footer {
   width: 80%;
