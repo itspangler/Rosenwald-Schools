@@ -17,7 +17,7 @@ var basemap_options = {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
   subdomains: 'abcd',
   maxZoom: 10,
-  minZoom: 4
+  minZoom: 1
 };
 
 map.addControl(L.control.zoom({
@@ -222,4 +222,8 @@ function ab(){
 function meth(){
   about.style.display = "none";
   methods.style.display = "block";
+}
+
+function data(){
+  window.open("data/rosenwald-schools-031819.geojson")
 }

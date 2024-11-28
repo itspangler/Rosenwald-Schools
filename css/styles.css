@@ -19,6 +19,7 @@
   height: 85vh;
   overflow-x: auto;
   background: #fff;
+  /* padding: 0em 1em 0em 3em; */
 }
 
 body {
@@ -41,7 +42,7 @@ header {
 }
 
 section {
-  margin: 0px 2em 0em 2em;
+  /* margin: 0px 2em 0em 2em; */
 }
 footer {
   /* width: 80%; */
@@ -229,5 +230,18 @@ hr {
   .first-column,
   .column {
     width: 100%;
+  }
+
+  .info {
+    height: 25vh;
+    /* width: 100vw; */
+  }
+
+  .navbar-brand {
+    font-size: 4vw;
+  }
+
+  #map {
+    height: 500px;
   }
 }

@@ -13,10 +13,10 @@
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/styles.css" />
 	<script>
-		$(function(){
+		$(function () {
 			$("#about").load("about.html");
-			$("#methods").load("methods.html"); 
-			$("#footer").load("footer.html"); 
+			$("#methods").load("methods.html");
+			$("#footer").load("footer.html");
 		});
 	</script>
 
@@ -28,19 +28,24 @@
 		<span class="navbar-brand mb-0 h1">The Rosenwald Schools of the American South</span>
 	</nav>
 
-	<section>
+	<section class="container-fluid">
 		<div class="row">
-			<div class="col-3 col-lg-3 col-sm-12 info">
-				<div class="my-2">
-					<button type="button" onclick="ab()" class="btn btn-light"><code>About</code></button>
-					<button type="button" onclick="meth()" class="btn btn-light"><code>Methods</code></button>
-					<div id="about"></div>
-					<div id="methods" style="display:none;"></div>
+			<div class="col-sm-3 px-4 info">
+				<div class="row">
+					<div class="my-2">
+						<button type="button" onclick="ab()" class="btn btn-light"><code>About</code></button>
+						<button type="button" onclick="meth()" class="btn btn-light"><code>Methods</code></button>
+						<button type="button" onclick="data()" class="btn btn-light"><code>Data</code></button>
+						<div id="about"></div>
+						<div id="methods" style="display:none;"></div>
+					</div>
 				</div>
 			</div>
-			<div class="col-12 col-lg-9 col-sm-12">
+			<div class="col-sm-9">
+				<div class="row"></div>
 				<div id="map"></div>
 			</div>
+		</div>
 		</div>
 	</section>
 	<div id="footer"></div>
