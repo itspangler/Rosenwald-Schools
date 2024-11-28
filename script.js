@@ -77,10 +77,10 @@ var schoolsLayer = $.getJSON("data/rosenwald-short.geojson", function(data) {
       layer.on('mouseout', function() {
         this.closeTooltip();
       });
-      layer.on('click', function(
-      e) { // zoom to point function -- giving me some trouble, though -- when you are zoomed out very far, it will zoom to where you clicked on the point, rather than its centroid -- which many times doesn't actually bring the point into frame...
-        map.setView(e.latlng, 10); // updated to flyTo as opposed to setView -- better? kind of...
-      });
+      // layer.on('click', function(
+      // e) { // zoom to point function -- giving me some trouble, though -- when you are zoomed out very far, it will zoom to where you clicked on the point, rather than its centroid -- which many times doesn't actually bring the point into frame...
+      //   map.setView(e.latlng, 10); // updated to flyTo as opposed to setView -- better? kind of...
+      // });
     }
   })
   console.log(schoolsLayer)
@@ -91,7 +91,7 @@ var schoolsLayer = $.getJSON("data/rosenwald-short.geojson", function(data) {
   dataLayer.eachLayer(function(layer) {
     layer.on('mouseover', function() {
       layer.setStyle({
-        fillColor: 'red'
+        fillColor: '#e83e8d'
       });
     });
 
@@ -182,13 +182,13 @@ function drawLegend(breaks) {
   // when it's added to the map
   legend.onAdd = function() {
     var div = L.DomUtil.create('div', 'legend');
-    div.innerHTML = "<h4>" + 'Rosenwald Schools by' + '<br>' + 'Construction Cost' + "</h4>" + "<br>";
+    div.innerHTML = "<h4>" + 'Construction Cost' + "</h4>" + "<br>";
     for (var i = 0; i < breaks.length; i++) { // keep all breaks
       var color = getColor(breaks[i][0], breaks);
       div.innerHTML +=
         '<span style="background:' + color + '"></span> ' +
-        '<label>' + "$" + (breaks[i][0]).toLocaleString() + ' &mdash; ' + "$" +
-        (breaks[i][1]).toLocaleString() + '</label>';
+        '<label>' + "$" + (breaks[i][0]).toLocaleString() + ' - ' + "$" +
+        (breaks[i][1]).toLocaleString() + '</label><br>';
     }
     return div;
   }; // end onAdd method
@@ -210,3 +210,16 @@ function getColor(d, breaks) {
     return '#0868ac'
   }
 } // end getColor
+
+const about = document.getElementById("about");
+const methods = document.getElementById("methods");
+
+function ab(){
+  about.style.display = "block";
+  methods.style.display = "none";
+}
+
+function meth(){
+  about.style.display = "none";
+  methods.style.display = "block";
+}

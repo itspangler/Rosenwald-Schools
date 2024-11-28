@@ -2,106 +2,50 @@
 <html>
 
 <head>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<meta charset=utf-8 />
 	<title>Mapping the Extant Rosenwald Schools</title>
 	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-	<link rel='icon' href='https://texasalmanac.com/sites/default/files/Rosenwald-1.jpg?1495477844' type='image/x-icon' />
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" /> -->
+	<link rel='icon' href='https://texasalmanac.com/sites/default/files/Rosenwald-1.jpg?1495477844'
+		type='image/x-icon' />
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
-	<!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,900i" rel="stylesheet"> -->
-	<!-- <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-C++cugH8+Uf86JbNOnQoBweHHAe/wVKN/mb0lTybu/NZ9sEYbd+BbbYtNpWYAsNP" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/styles.css" />
+	<script>
+		$(function(){
+			$("#about").load("about.html");
+			$("#methods").load("methods.html"); 
+			$("#footer").load("footer.html"); 
+		});
+	</script>
 
 </head>
 
 <body>
 
-	<header>
-		<h1 classclass="fixed-header">The Rosenwald Schools of the US South:</h1>
-		<h4 style="text-align:center"><i>Explore the story, the schools, and the data</i></h4>
-	</header>
+	<nav class="navbar navbar-light bg-light">
+		<span class="navbar-brand mb-0 h1">The Rosenwald Schools of the American South</span>
+	</nav>
+
 	<section>
 		<div class="row">
-			<hr>
-			<div id="map"></div>
-			<hr>
-			<div class="first-column">
-				<h2 style="text-align:center">THE ROSENWALD SCHOOLS</h2>
-				<p style="text-align:justify">In 1912, a partnership struck between Booker T. Washington and Julius Rosenwald would spur the
-					construction of nearly five-thousand public school buildings for African American communities in the rural
-					South.
-					Washington was the president of Tuskegee Institute, and Rosenwald, the president of Sears-Roebuck. Their
-					partnership
-					was based on a model, proposed by Washington and approved by Rosenwald, that would award matching grants to
-					rural black communities who were interested in constructing new educational facilities.</p>
-				<p style="text-align:justify">This funding model and philosophy were based on Washington's (controversial) philosophy of "self-help," in which he felt
-					the best way for black Americans to achieve racial justice was slowly, incrementally, and through individual hard work.
-					In addition to black communities and Rosenwald grants, the schools were funded by public revenue and, less frequently, white allies.
-					All told, the public investment represented 64% – or $17.7 million – of the total funding for the schools, making these
-					buildings one of the largest public investments in black education in US American history.</p>
-				<p style="text-align:justify">Known today as the Rosenwald schools, these buildings served multiple purposes, ranging from traditional
-					educational facilities to community
-					institutions and centers of local cultural events. In addition to traditional schools, the building program
-					also
-					helped to construct teachers' homes. Although the Rosenwald building program ended in 1932, the schools
-					remained in popular use until desegregation in 1954. In some cases, Rosenwald structures continue to be
-					utilized today,
-					ranging in function from museums and community centers to repurposed schoolhouse buildings. Unfortunately,
-					within
-					the 15 participating Rosenwald states, it is not always clear which of the 5,357 structures are still extant –
-					especially considering they were mostly built in rural areas.</p><br>
-
+			<div class="col-3 col-lg-3 col-sm-12 info">
+				<div class="my-2">
+					<button type="button" onclick="ab()" class="btn btn-light"><code>About</code></button>
+					<button type="button" onclick="meth()" class="btn btn-light"><code>Methods</code></button>
+					<div id="about"></div>
+					<div id="methods" style="display:none;"></div>
+				</div>
 			</div>
-			<div class="column">
-				<h2 style="text-align:center">MAP, METHODS, AND DATA</h2>
-				<p style="text-align:justify">The above map represents the current state of knowledge on existing Rosenwald schools across the 15
-					participating states.
-					Mouse over a school to learn more about its construction costs, which are based on the <a href="http://rosenwald.fisk.edu/archives" target="_blank">archives from Fisk University</a>.
-					The data – aggregated into a single spatial dataset from a variety of sources including state historic preservation
-					organizations,
-					National Register of Historic Places submissions, and individual research projects – represents 603 Rosenwald
-					structures. This translates to about 11.25% of the orginal schools. The dataset contains notable gaps in some states where records of school locations were not carefully kept (e.g., Texas) or surveys of school locations were ongoing at the time of data creation (e.g., Tennessee).</p>
-				<p style="text-align:justify">The data follows a schema for cultural resources developed by the National Parks Service (NPS), the <b> Cultural Resource Spatial Data Transfer Standards</b> or <b> SDS</b>. The SDS is a data management schema
-					that prioritizes locational data and metadata (as opposed to descriptive data) in the resource's main attribute table. A unique Global ID tag is assigned to each record (e.g., each Rosenwald School), allowing other descriptive data such as
-					funding sources to be easily related or associated with other existing databases. Read more about the SDS at the <a href="https://www.nps.gov/hdp/standards/crgisstandards2.htm">NPS' website</a>, and learn more about the Rosenwald Schools' history in <a href="https://www.arcgis.com/apps/Cascade/index.html?appid=7541c163fb20486598969c7acb559663" target="_blank">this Story Map</a>.
-				</p>
-				<h3><b>Get the data: </b>| <a href="data/rosenwald-schools-031819.geojson" download>GeoJSON</a> | <a href="data/shapefile/rosenwald-schools-cultural-resource.zip" download>Shapefile</a> | <a href="data/gdb/CR_Rosenwald.gdb.zip"
-						download>Geodatabase |</a></h3>
-
-				<!-- <img class="max-image-width" src="https://nthp-savingplaces.s3.amazonaws.com/2015/09/30/19/07/02/786/MTZion_Rosenwald_Clements_mr.jpg" title="Mt. Zion">
-				<div class="linkbox">
-					The Mt. Zion Rosenwald School in Florence, South Carolina (<a href="https://savingplaces.org/places/rosenwald-schools" target="_blank">Source</a>)
-				</div>
-				<br>
-				<img class="max-image-width" src="https://www.teachingforchange.org/wp-content/uploads/2016/06/Rosenwald-School-Frankfort-KY-1957.jpg" title="A Rosenwald school in Frankfort, Kentucky, 1957">
-				<div class="linkbox">
-					A Rosenwald school in Frankfort, Kentucky, 1957 (<a href="https://www.teachingforchange.org/rosenwald-teaching-guide" target="_blank">Source</a>)
-				</div>
-				<br>
-				<img class="max-image-width" src="https://wfpl.org/wp-content/uploads/2016/02/rosenwald.jpg" title="ulius Rosenwald with students">
-				<div class="linkbox">
-					Julius Rosenwald with students (<a href="https://wfpl.org/rosenwald-schools-doc-louisville-kentucky/" target="_blank">Source</a>) -->
-				<ul><i>
-						<li>Check out my website: <a href="https://itspangler.com/" target="blank">https://itspangler.com</a>
-						<li>Find me on GitHub: <a href="https://github.com/itspangler" target="blank">Ian Spangler</a></li>
-						<li>Follow me on Twitter: <a href="https://twitter.com/itspangler" target="blank">@itspangler</a></li>
-					</i></ul>
+			<div class="col-12 col-lg-9 col-sm-12">
+				<div id="map"></div>
 			</div>
 		</div>
 	</section>
-
-	<footer>
-		<hr>
-		<a href="https://newmapsplus.github.io">
-			<img src="https://newmapsplus.github.io/assets/graphics/logo-2018-nmp-75px-h-gray.png" alt="University of Kentucky Geography">
-		</a>
-		<a href="https://uky-gis.github.io">
-			<img src="https://newmapsplus.github.io/assets/graphics/logo-2018-geography-75px-h.png" alt="University of Kentucky Geography">
-		</a>
-	</footer>
+	<div id="footer"></div>
 
 	<script src="https://unpkg.com/simple-statistics@6.1.1/dist/simple-statistics.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
 	<script src="script.js"></script>
 

@@ -1,12 +1,38 @@
+.navbar {
+  font-weight: 900;
+  border-bottom: 1px dotted #737372;
+}
+
+.infohead {
+  margin: 1em 0em 1em 0em;
+}
+
+.marginbottom p {
+  margin-bottom: 1em;
+}
+
+.container {
+  margin:0;
+}
+
+.info {
+  height: 85vh;
+  overflow-x: auto;
+  background: #fff;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Georgia';
+  font-family: 'avenir';
   font-weight: 300;
   color: #3d3d3d;
-  font-size: 100%;
-  /* padding-top: 60px;
-  padding-bottom: 40px; */
+  font-size: 0.8em;
+}
+
+.logo img {
+  max-width: 100px;
+  position:relative;
 }
 
 header {
@@ -14,17 +40,22 @@ header {
   margin: 10px auto;
 }
 
-section,
+section {
+  margin: 0px 2em 0em 2em;
+}
 footer {
-  width: 80%;
-  margin: 10px auto;
+  /* width: 80%; */
+  border-top: 1px dotted black;
+  padding-top:0.5em;
 }
 
+footer a
+
 h1 {
-  font-weight: 500;
+  font-weight: 900;
   font-size: 4em;
-  font-family: 'Georgia';
-  letter-spacing: .02em;
+  font-family: 'avenir';
+  letter-spacing: -.02em;
   margin: 5px 0;
   text-align: center;
   /* text-shadow: 2px 2px 2px #43a2ca; */
@@ -51,21 +82,21 @@ h4 {
   font-weight: 150;
   font-size: 1.5em;
   margin: 0;
-  font-family: 'Georgia';
+  font-family: 'avenir';
 }
 
 p {
   font-size: 1.1em;
   line-height: 1.3em;
   margin-bottom: 0.1px;
-  font-family: 'Georgia';
+  font-family: 'avenir';
 }
 
 a {
   color: #004A8B;
   font-weight: 400;
   text-decoration: none;
-  font-family: 'Georgia';
+  font-family: 'avenir';
 }
 
 a:hover {
@@ -85,7 +116,7 @@ li {
 
 hr {
   margin: 20px 0;
-  border: 0;
+  border: 0px dotted black;
   height: 1px;
   background: #63666a;
 }
@@ -102,8 +133,8 @@ hr {
 
 #map {
   width: 100%;
-  height: 550px;
-  margin: 20px auto;
+  height: 85vh;
+  /* margin: 20px auto; */
 }
 
 .max-image-width {
@@ -132,19 +163,20 @@ hr {
 .legend {
   padding: 6px 8px;
   font-size: 1em;
-  font-family: 'Georgia';
+  font-family: 'avenir';
   /* Use transparency to blend elements. */
   border: 2px solid rgba(244, 244, 244, 0.2);
   background: rgba(100, 100, 100, 0.9);
   color: rgba(244, 244, 244, 0.8);
   border-radius: 5px;
+  /* max-width: 250px;
+  margin-left: 1em; */
 }
 
 .legend h3 {
   font-size: 1.1em;
   font-weight: normal;
   color: #ddd;
-  /* Light */
   margin: 0 0 10px 0;
 }
 
@@ -168,12 +200,12 @@ hr {
 /* Leaflet popup styles */
 .leaflet-tooltip {
   font-size: 1em;
-  font-family: 'Georgia';
+  font-family: 'avenir';
   padding: 5px 8px;
 }
 
 .leaflet-tooltip ul {
-  font-family: 'Georgia';
+  font-family: 'avenir';
   padding: 0px 20px;
   margin: 0px;
   line-height: 1.0em;
